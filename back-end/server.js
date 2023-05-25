@@ -26,7 +26,14 @@ app.use(
 );
 app.use(express.json());
 
+// controllers
+const usersController = require("./controller/usersController");
+
 // start listening
 app.listen(PORT, () => {
   console.log(`Yay! Server is listening on Port: ${PORT}`);
 });
+
+// users routes
+app.post("/login", usersController.getUser);
+app.post("/signup", usersController.createUser);
