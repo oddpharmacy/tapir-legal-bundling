@@ -5,7 +5,10 @@ const path = require("path");
 
 // port & origins
 const PORT = 8080;
-const allowedOrigins = ["http://localhost:3000"];
+const allowedOrigins = [
+  "http://localhost:3000",
+  "https://tapir-legal.onrender.com/",
+];
 
 // app
 const app = express();
