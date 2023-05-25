@@ -28,6 +28,7 @@ app.use(express.json());
 
 // controllers
 const usersController = require("./controller/usersController");
+const casesController = require("./controller/casesController");
 
 // start listening
 app.listen(PORT, () => {
@@ -37,3 +38,7 @@ app.listen(PORT, () => {
 // users routes
 app.post("/login", usersController.getUser);
 app.post("/signup", usersController.createUser);
+
+// cases routes
+app.post("/createcase", casesController.createCase);
+app.get("/cases/:userId", casesController.getCasesByUser);

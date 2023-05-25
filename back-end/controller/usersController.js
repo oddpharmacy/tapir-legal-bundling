@@ -17,8 +17,6 @@ module.exports = {
       const user = await userModel.getUser(req.body);
       const dbPassword = user[0].password;
       const userInputPassword = req.body.password;
-      console.log("userinput ", userInputPassword);
-      console.log("dbPassword ", dbPassword);
       const checkIfValidPassword = await bcrypt.compare(
         userInputPassword,
         dbPassword

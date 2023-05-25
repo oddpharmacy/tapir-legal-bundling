@@ -19,7 +19,7 @@ module.exports = {
     const userDetails = await knex("users")
       .select("username", "password")
       .from("users")
-      .where({ username: username })
+      .where("username", username)
       .returning(["id", "password"]);
     return userDetails;
   },
