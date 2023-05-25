@@ -7,7 +7,7 @@
     "start": "node server.js",
     "dev": "nodemon server.js",
     "migrate": "knex migrate:latest",
-    "seed": "knex seed: run",
+    "seed": "knex seed:run",
     "build": "npm i && npm run migrate && npm run seed"
   },
   "author": "lisa",
