@@ -13,6 +13,9 @@ module.exports = {
     migrations: {
       directory: "./db/migrations",
     },
+    seeds: {
+      directory: "./db/seeds",
+    },
   },
 
   production: {
@@ -24,6 +27,9 @@ module.exports = {
     },
     migrations: {
       directory: __dirname + "/db/migrations",
+    },
+    seeds: {
+      directory: __dirname + "/db/seeds",
     },
   },
 };
