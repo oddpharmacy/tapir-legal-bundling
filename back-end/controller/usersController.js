@@ -15,13 +15,14 @@ module.exports = {
   async getUser(req, res) {
     try {
       const user = await userModel.getUser(req.body);
-      const userInputPassword = user[0].password;
-      const dbPassword = req.body.password;
+      const dbPassword = user[0].password;
+      const userInputPassword = req.body.password;
+      console.log("userinput ", userInputPassword);
+      console.log("dbPassword ", dbPassword);
       const checkIfValidPassword = await bcrypt.compare(
-        dbPassword,
-        userInputPassword
+        userInputPassword,
+        dbPassword
       );
-      console.log(checkIfValidPassword);
       checkIfValidPassword
         ? res.status(200).send(user)
         : res.status(404).send("Incorrect Username/Password");
