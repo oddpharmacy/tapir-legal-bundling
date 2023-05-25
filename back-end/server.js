@@ -1,6 +1,7 @@
 // requires
 const express = require("express");
 const cors = require("cors");
+const path = require("path");
 
 // port & origins
 const PORT = 8080;
@@ -8,8 +9,7 @@ const allowedOrigins = ["http://localhost:3000"];
 
 // app
 const app = express();
-app.use(express.static("build"));
-app.use(express.json());
+app.use(express.static(path.join(__dirname, "/public")));
 app.use(
   cors({
     origin: (origin, cb) => {
@@ -21,6 +21,7 @@ app.use(
     },
   })
 );
+app.use(express.json());
 
 // start listening
 app.listen(PORT, () => {
