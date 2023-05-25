@@ -11,7 +11,7 @@ module.exports = {
       user: "lisa",
     },
     migrations: {
-      directory: __dirname + "/db/migrations",
+      directory: "./db/migrations",
     },
   },
 
