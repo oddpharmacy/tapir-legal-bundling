@@ -1,5 +1,7 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { PdfContext } from "../Contexts/PdfContext";
+import AppealCoverTemplate from "./AppealCoverTemplate";
+import { PDFDownloadLink } from "@react-pdf/renderer";
 
 export default function UserInputForm() {
   const {
@@ -11,8 +13,14 @@ export default function UserInputForm() {
     setRespondents,
     solicitors,
     setSolicitors,
-    setGeneratePdf,
+    setShowDownloadLink,
   } = useContext(PdfContext);
+
+  // Handlers
+  const handleGenerateButtonClick = (event) => {
+    event.preventDefault();
+    setShowDownloadLink(true);
+  };
 
   // Cases
   const handleCaseNumberChange = (event) => {
@@ -178,17 +186,19 @@ export default function UserInputForm() {
           ))}
           <button onClick={addSolicitor}>Add Solicitor</button>
         </div>
+        <button onClick={(e) => handleGenerateButtonClick(e)}>Generate</button>
       </form>
-      <button
-        onClick={(e) => {
-          e.preventDefault();
-          console.log("userinputform caseNumber: ", caseNumber);
-          console.log("userinput app array: ", appellants);
-          setGeneratePdf(true);
-        }}
-      >
-        CLICK ME
-      </button>
     </div>
   );
 }
+
+//   {/* <button
+//     onClick={(e) => {
+//       e.preventDefault();
+//       console.log("userinputform caseNumber: ", caseNumber);
+//       console.log("userinput app array: ", appellants);
+//       setGeneratePdf(true);
+//     }}
+//   >
+//     CLICK ME
+//   </button> */}

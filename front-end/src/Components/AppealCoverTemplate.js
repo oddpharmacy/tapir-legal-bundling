@@ -65,14 +65,12 @@ export default function AppealCoverTemplate() {
     <Document>
       <Page size="A4" style={styles.page}>
         <View style={styles.titlesection}>
-          {console.log("case number: ", caseNumber)}
           <Text>IN THE MALAYSIAN COURT OF APPEAL</Text>
           <Text>(APPELLATE JURISDICTION)</Text>
           <Text style={styles.casenumber}>CIVIL APPEAL NO. {caseNumber}</Text>
         </View>
         <View style={styles.betweenAnd}>
           <Text>BETWEEN</Text>
-          {console.log("appellants: ", appellants)}
         </View>
         {appellants.map((app, index) => (
           <View style={styles.row} key={index}>
