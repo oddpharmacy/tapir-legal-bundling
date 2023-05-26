@@ -55,7 +55,7 @@ module.exports = {
 
       const solicitors = await knex("solicitors")
         .where("cases_id", userCase.id)
-        .select("party", "name");
+        .select("name", "party");
       userCase.solicitors = solicitors;
     }
 
