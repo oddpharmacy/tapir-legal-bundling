@@ -13,7 +13,7 @@ export default function AppealCoverTemplate() {
       fontSize: 12,
       lineHeight: 1.5,
     },
-    titlesection: { textAlign: "center", marginTop: 50, marginBottom: 17 },
+    titlesection: { textAlign: "center", marginTop: 70, marginBottom: 17 },
     casenumber: { textDecoration: "underline" },
     betweenAnd: { textAlign: "center", marginBottom: 17 },
     row: {
@@ -115,8 +115,8 @@ export default function AppealCoverTemplate() {
 
               {nextSol ? (
                 <View style={styles.rightAdv} key={index + 1}>
-                  <Text>{solicitors[index + 1].name}</Text>
-                  <Text>Solicitors for the {solicitors[index + 1].party}</Text>
+                  <Text>{nextSol.name}</Text>
+                  <Text>Solicitors for the {nextSol.party}</Text>
                 </View>
               ) : (
                 <View style={styles.rightAdv} key={index + 1} />

@@ -1,16 +1,24 @@
+// Packages
 import React, { useState } from "react";
-import "../Styles/App.css";
-import UserInputForm from "./UserInputForm";
-import AppealCoverTemplate from "./AppealCoverTemplate";
-import { PdfContext } from "../Contexts/PdfContext";
 import { PDFViewer, PDFDownloadLink } from "@react-pdf/renderer";
 
+// Style
+import "../Styles/App.css";
+
+// Components
+import UserInputForm from "./UserInputForm";
+import AppealCoverTemplate from "./AppealCoverTemplate";
+import LivePreview from "./LivePreview";
+
+// Context
+import { PdfContext } from "../Contexts/PdfContext";
+
 export default function App() {
+  // States
   const [caseNumber, setCaseNumber] = useState("");
   const [appellants, setAppellants] = useState([""]);
   const [respondents, setRespondents] = useState([""]);
   const [solicitors, setSolicitors] = useState([{ name: "", party: "" }]);
-
   const [showDownloadLink, setShowDownloadLink] = useState(false);
 
   // Handlers
@@ -62,18 +70,8 @@ export default function App() {
           <UserInputForm />
         </div>
         <div className="container-four"></div>
-        {showDownloadLink ? (
-          <PdfContext.Provider
-            value={{
-              caseNumber,
-              appellants,
-              respondents,
-              solicitors,
-            }}
-          >
-            {showDownloadLink && handleShowDownloadPdf()}
-          </PdfContext.Provider>
-        ) : null}
+        {showDownloadLink && handleShowDownloadPdf()}
+        <LivePreview />
       </PdfContext.Provider>
     </>
   );
