@@ -1,10 +1,18 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
+import { PdfContext } from "../Contexts/PdfContext";
 
 export default function UserInputForm() {
-  const [caseNumber, setCaseNumber] = useState("");
-  const [appellants, setAppellants] = useState([""]);
-  const [respondents, setRespondents] = useState([""]);
-  const [solicitors, setSolicitors] = useState([{ name: "", party: "" }]);
+  const {
+    caseNumber,
+    setCaseNumber,
+    appellants,
+    setAppellants,
+    respondents,
+    setRespondents,
+    solicitors,
+    setSolicitors,
+    setGeneratePdf,
+  } = useContext(PdfContext);
 
   // Cases
   const handleCaseNumberChange = (event) => {
@@ -90,7 +98,7 @@ export default function UserInputForm() {
           {appellants.map((app, index) => (
             <div key={index}>
               <input
-                typeof="text"
+                type="text"
                 value={app}
                 onChange={(e) => handleAppellantsChange(e, index)}
                 required
@@ -171,6 +179,16 @@ export default function UserInputForm() {
           <button onClick={addSolicitor}>Add Solicitor</button>
         </div>
       </form>
+      <button
+        onClick={(e) => {
+          e.preventDefault();
+          console.log("userinputform caseNumber: ", caseNumber);
+          console.log("userinput app array: ", appellants);
+          setGeneratePdf(true);
+        }}
+      >
+        CLICK ME
+      </button>
     </div>
   );
 }
