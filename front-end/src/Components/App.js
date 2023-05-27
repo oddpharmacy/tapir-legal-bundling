@@ -59,9 +59,18 @@ export default function App() {
     setShowLogin(true);
   };
 
+  const fetchCase = async (event) => {
+    const response = await fetch(
+      "https://tapir-legal-backend.onrender.com/cases/1"
+    );
+    const data = await response.json();
+    console.log(data);
+  };
+
   return (
     <>
       <p>Hi, I'm here, I'm reacting hehe</p>
+      <button onClick={fetchCase}>Test</button>
       <PdfContext.Provider
         value={{
           caseNumber,

@@ -1,30 +1,30 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { PdfContext } from "../Contexts/PdfContext";
 import "../Styles/Signup.css";
 
 export default function Signup() {
-  const { setShowSignup } = useState(PdfContext);
-  const [newUsername, setNewUsername] = useState("");
-  const [newPassword, setNewPassword] = useState("");
+  const { setShowSignup } = useContext(PdfContext);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const [agreeToTerms, setAgreeToTerms] = useState(false);
   const [signupFailed, setSignupFailed] = useState(false);
 
   // Handlers
   const handleNewUsernameChange = (event) => {
-    setNewUsername(event.target.value);
+    setUsername(event.target.value);
   };
 
   const handleNewPasswordChange = (event) => {
-    setNewPassword(event.target.value);
+    setPassword(event.target.value);
   };
 
   const handleCheckboxChange = (event) => {
     setAgreeToTerms(event.target.checked);
   };
 
-  const handleCloseSignUp = () => {
-    setShowSignup(false);
-  };
+  // const handleCloseSignUp = () => {
+  //   setShowSignup(false);
+  // };
 
   const handleSignupFailed = () => {
     setSignupFailed(true);
@@ -36,13 +36,15 @@ export default function Signup() {
   // POST Request
   const handleSignupTrigger = async (event) => {
     event.preventDefault();
+    console.log("newuser: ", username);
+    console.log("newpassword: ", password);
     try {
       const response = await fetch(
         "https://tapir-legal-backend.onrender.com/signup",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ newUsername, newPassword }),
+          body: JSON.stringify({ username, password }),
         }
       );
 
@@ -52,7 +54,7 @@ export default function Signup() {
 
       if (response.ok) {
         console.log("Signup successful!");
-        handleCloseSignUp();
+        setShowSignup(false);
       } else {
         console.log("Signup failed.");
         handleSignupFailed();
@@ -72,7 +74,7 @@ export default function Signup() {
             <label>Username</label>
             <input
               type="text"
-              value={newUsername}
+              value={username}
               onChange={handleNewUsernameChange}
               required
             />
@@ -81,7 +83,7 @@ export default function Signup() {
             <label>Password</label>
             <input
               type="password"
-              value={newPassword}
+              value={password}
               onChange={handleNewPasswordChange}
               required
             />
