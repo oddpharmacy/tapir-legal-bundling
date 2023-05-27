@@ -4,6 +4,7 @@ const bcrypt = require("bcrypt");
 module.exports = {
   async createUser(user) {
     const { username, password } = user;
+    console.log("username in users: ", username);
     const hashedPassword = await bcrypt.hash(password, 10);
     const userDetails = await knex("users")
       .insert({
@@ -11,6 +12,8 @@ module.exports = {
         password: hashedPassword,
       })
       .returning(["id", "username"]);
+
+    console.log("userdetails ", userDetails);
     return userDetails;
   },
 

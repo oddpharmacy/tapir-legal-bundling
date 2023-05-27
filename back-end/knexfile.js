@@ -9,6 +9,7 @@ module.exports = {
     connection: {
       database: "tapir",
       user: "lisa",
+      password: "password",
     },
     migrations: {
       directory: "./db/migrations",

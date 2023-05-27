@@ -1,16 +1,18 @@
-// Packages
+// Package imports
 import React, { useState } from "react";
-import { PDFViewer, PDFDownloadLink } from "@react-pdf/renderer";
+import { PDFDownloadLink } from "@react-pdf/renderer";
 
-// Style
+// Style imports
 import "../Styles/App.css";
 
-// Components
+// Component imports
 import UserInputForm from "./UserInputForm";
 import AppealCoverTemplate from "./AppealCoverTemplate";
 import LivePreview from "./LivePreview";
+import Login from "./Login";
+import Signup from "./Signup";
 
-// Context
+// Context imports
 import { PdfContext } from "../Contexts/PdfContext";
 
 export default function App() {
@@ -20,6 +22,11 @@ export default function App() {
   const [respondents, setRespondents] = useState([""]);
   const [solicitors, setSolicitors] = useState([{ name: "", party: "" }]);
   const [showDownloadLink, setShowDownloadLink] = useState(false);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [showLogin, setShowLogin] = useState(false);
+  const [showSignUp, setShowSignup] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   // Handlers
   const handleShowDownloadPdf = () => {
@@ -36,7 +43,6 @@ export default function App() {
         <AppealCoverTemplate />
       </PdfContext.Provider>
     );
-    console.log("howdy");
     const fileName = `roa_${Date.now()}.pdf`;
 
     return (
@@ -46,6 +52,11 @@ export default function App() {
         }
       </PDFDownloadLink>
     );
+  };
+
+  const handleShowLogin = (event) => {
+    event.preventDefault();
+    setShowLogin(true);
   };
 
   return (
@@ -62,9 +73,19 @@ export default function App() {
           solicitors,
           setSolicitors,
           setShowDownloadLink,
+          username,
+          setUsername,
+          password,
+          setPassword,
+          setIsLoggedIn,
+          setShowLogin,
+          setShowSignup,
         }}
       >
-        <div className="container-one"></div>
+        {showLogin ? <Login /> : showSignUp ? <Signup /> : null}
+        <div className="container-one">
+          <button onClick={(e) => handleShowLogin(e)}>Login</button>
+        </div>
         <div className="container-two"></div>
         <div className="container-three">
           <UserInputForm />
