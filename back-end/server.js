@@ -7,11 +7,13 @@ const path = require("path");
 const PORT = 8080;
 const allowedOrigins = [
   "http://localhost:3000",
-  "https://tapir-legal.onrender.com/",
+  "https://tapir-legal.onrender.com",
 ];
 
 // app
 const app = express();
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "/public")));
 app.use(
   cors({
@@ -24,16 +26,15 @@ app.use(
     },
   })
 );
-app.use(express.json());
-
-// controllers
-const usersController = require("./controller/usersController");
-const casesController = require("./controller/casesController");
 
 // start listening
 app.listen(PORT, () => {
   console.log(`Yay! Server is listening on Port: ${PORT}`);
 });
+
+// controllers
+const usersController = require("./controller/usersController");
+const casesController = require("./controller/casesController");
 
 // users routes
 app.post("/login", usersController.getUser);
