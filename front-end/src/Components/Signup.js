@@ -74,24 +74,31 @@ export default function Signup() {
   return (
     <div className="signup-overlay" onClick={handleOutsideClick}>
       <div className="signup-container">
-        <button onClick={(e) => handleCloseSignup(e)}>x</button>
-        <hr></hr>
+        <button
+          onClick={(e) => handleCloseSignup(e)}
+          className="login-close-button"
+        >
+          x
+        </button>
+        <hr className="login-line submit-line"></hr>
         <form onSubmit={handleSignupTrigger}>
-          <div>
+          <div className="form-group">
             <label>Username</label>
             <input
               type="text"
               value={username}
               onChange={handleNewUsernameChange}
+              className="form-input"
               required
             />
           </div>
-          <div>
-            <label>Password</label>
+          <div className="form-group">
+            <label className="password-label">Password</label>
             <input
               type="password"
               value={password}
               onChange={handleNewPasswordChange}
+              className="form-input"
               required
             />
           </div>
@@ -101,12 +108,16 @@ export default function Signup() {
                 type="checkbox"
                 checked={agreeToTerms}
                 onChange={handleCheckboxChange}
+                className="checkbox"
                 required
               />
-              I agree to the terms of use.
+              <span className="checkbox-custom"></span>I agree to the terms of
+              use.
             </label>
           </div>
-          <input type="submit" className="submit-button" />
+          <div className="signup-submit-container">
+            <input type="submit" className="login-submit-button" />
+          </div>
         </form>
         {signupFailed ? (
           <p>Signup unsuccessful. Username already exists.</p>
