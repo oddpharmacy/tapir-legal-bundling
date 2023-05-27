@@ -4,6 +4,7 @@ import { PDFDownloadLink } from "@react-pdf/renderer";
 
 // Style imports
 import "../Styles/App.css";
+import tapirImage from "../Images/tapir.png";
 
 // Component imports
 import UserInputForm from "./UserInputForm";
@@ -48,7 +49,11 @@ export default function App() {
     const fileName = `roa_${Date.now()}.pdf`;
 
     return (
-      <PDFDownloadLink document={pdf} fileName={fileName}>
+      <PDFDownloadLink
+        document={pdf}
+        fileName={fileName}
+        className="pdf-download-link"
+      >
         {({ blob, url, loading, error }) =>
           loading ? "Generating PDF..." : "Download PDF"
         }
@@ -61,18 +66,8 @@ export default function App() {
     setShowLogin(true);
   };
 
-  const fetchCase = async (event) => {
-    const response = await fetch(
-      "https://tapir-legal-backend.onrender.com/cases/1"
-    );
-    const data = await response.json();
-    console.log(data);
-  };
-
   return (
-    <>
-      <p>Hi, I'm here, I'm reacting hehe</p>
-      <button onClick={fetchCase}>Test</button>
+    <div className="app-container">
       <PdfContext.Provider
         value={{
           caseNumber,
@@ -98,17 +93,51 @@ export default function App() {
       >
         {showLogin ? <Login /> : showSignUp ? <Signup /> : null}
         <div className="container-one">
-          <button onClick={(e) => handleShowLogin(e)}>Login</button>
+          <p className="copyright">©2023</p>
+          <button
+            onClick={(e) => handleShowLogin(e)}
+            className="div-one-button"
+          >
+            Login
+          </button>
+          <button className="div-one-button">About</button>
+          <button className="div-one-button">Usage</button>
+          <button className="div-one-button">Terms</button>
+          <button className="div-one-button">Team</button>
         </div>
-        <div className="container-two"></div>
+        <div className="container-two">
+          <img src={tapirImage} alt="Tapir" className="tapir-logo" />
+          <span className="container-two-title-top">
+            TAPIR
+            <br />
+            <span className="container-two-serif-font">A New Realm</span>
+          </span>
+          <div className="container-two-middle">
+            A LEGAL BUNDLING APP
+            <br />
+            230525 <br />
+            <span className="container-two-serif-font construction">
+              <span className="orange-dot"></span> under construction
+            </span>
+          </div>
+          <div className="container-two-bottom">
+            VER. 001 <br />
+            <span className="container-two-serif-font">2023</span>
+          </div>
+        </div>
         <div className="container-three">
-          <UserInputForm />
+          <div className="inner-container-three">
+            <UserInputForm />
+            <div className="download-link-container">
+              {showDownloadLink && handleShowDownloadPdf()}
+            </div>
+          </div>
         </div>
-        <div className="container-four"></div>
-        {showDownloadLink && handleShowDownloadPdf()}
-        <LivePreview />
+        <div className="container-four">
+          <LivePreview />
+        </div>
       </PdfContext.Provider>
-    </>
+    </div>
   );
 }
 

@@ -1,0 +1,70 @@
+.preview-a4-size {
+  width: 400px;
+  height: 560px;
+  max-width: 100%;
+  max-height: 100%;
+  background-color: tomato;
+  box-sizing: border-box;
+  margin: 0 auto;
+  font-size: 10px;
+  font-family: Arial, Helvetica, sans-serif;
+  overflow-y: auto;
+}
+
+.preview-title-section {
+  text-align: center;
+  margin-top: 40px;
+  line-height: 15px;
+}
+
+.caseno {
+  text-decoration: underline;
+}
+
+.preview-and-between {
+  margin-top: 15px;
+  text-align: center;
+}
+
+.the-parties-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 0 30px;
+  margin-top: 15px;
+}
+
+.volume-section {
+  text-align: center;
+  margin-top: 20px;
+  margin-left: 35px;
+  margin-right: 35px;
+  margin-bottom: 15px;
+  padding: 10px;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+}
+
+.adv {
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  margin-left: 35px;
+  margin-right: 35px;
+}
+
+.leftAdv {
+  flex: 1;
+  border: 1pt solid black;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.rightAdv {
+  flex: 1;
+  border-top: 1pt solid black;
+  border-right: 1pt solid black;
+  border-bottom: 1pt solid black;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}

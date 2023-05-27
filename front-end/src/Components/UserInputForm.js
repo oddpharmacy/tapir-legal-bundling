@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { PdfContext } from "../Contexts/PdfContext";
 import AppealCoverTemplate from "./AppealCoverTemplate";
 import { PDFDownloadLink } from "@react-pdf/renderer";
+import "../Styles/UserInputForm.css";
 
 export default function UserInputForm() {
   const {
@@ -91,7 +92,7 @@ export default function UserInputForm() {
     <div id="form-container">
       <h3>BUNDLE RECORD OF APPEAL</h3>
       <h5>COVER PAGE CREATION</h5>
-      <form>
+      <form className="appeal-form">
         <div>
           <label>Case Number</label>
           <input
@@ -99,17 +100,25 @@ export default function UserInputForm() {
             value={caseNumber}
             onChange={handleCaseNumberChange}
             required
+            className="casenumber-input"
           />
+          <hr className="casenum-hr"></hr>
         </div>
         <div>
-          <label>Appellant(s)</label>
+          <div className="party-container">
+            <label className="party-label">Appellant(s):</label>
+            <button onClick={addAppellant} className="add-party-button">
+              Add Appellant
+            </button>
+          </div>
           {appellants.map((app, index) => (
-            <div key={index}>
+            <div key={index} className="input-container">
               <input
                 type="text"
                 value={app}
                 onChange={(e) => handleAppellantsChange(e, index)}
                 required
+                className="appeal-cover-form-input"
               />
               {index > 0 ? (
                 <button
@@ -117,23 +126,29 @@ export default function UserInputForm() {
                     e.preventDefault();
                     removeAppellant(index);
                   }}
+                  className="remove-button"
                 >
                   x
                 </button>
               ) : null}
             </div>
           ))}
-          <button onClick={addAppellant}>Add Appellant</button>
         </div>
         <div>
-          <label>Respondent(s)</label>
+          <div className="party-container">
+            <label className="party-label">Respondent(s):</label>
+            <button onClick={addRespondent} className="add-party-button">
+              Add Respondent
+            </button>
+          </div>
           {respondents.map((res, index) => (
-            <div key={index}>
+            <div key={index} className="input-container">
               <input
                 type="text"
                 value={res}
                 onChange={(e) => handleRespondentsChange(e, index)}
                 required
+                className="appeal-cover-form-input"
               />
               {index > 0 ? (
                 <button
@@ -141,52 +156,67 @@ export default function UserInputForm() {
                     e.preventDefault();
                     removeRespondent(index);
                   }}
+                  className="remove-button"
                 >
                   x
                 </button>
               ) : null}
             </div>
           ))}
-          <button onClick={addRespondent}>Add Respondent</button>
         </div>
-        <div>
-          <label>Solicitors</label>
+        <div className="sol-div">
+          <div className="party-container">
+            <label className="party-label">Solicitors</label>
+            <button onClick={addSolicitor} className="add-party-button">
+              Add Solicitor
+            </button>
+          </div>
+          <hr></hr>
           {solicitors.map((sol, index) => (
-            <div key={index}>
+            <div key={index} className="input-container">
               <div>
-                <label>Firm</label>
+                <label>Firm:</label>
                 <input
                   type="text"
                   value={sol.name}
                   onChange={(e) => handleSolicitorsChange(e, index)}
                   required
+                  className="appeal-cover-form-input"
                 />
               </div>
 
               <div>
-                <label>Representing</label>
+                <label>Representing:</label>
                 <input
                   type="text"
                   value={sol.party}
                   onChange={(e) => handleRepresentingChange(e, index)}
                   required
+                  className="appeal-cover-form-input"
                 />
+                {index > 0 ? (
+                  <button
+                    onClick={(e) => {
+                      e.preventDefault();
+                      removeSolicitor(index);
+                    }}
+                    className="remove-button"
+                  >
+                    x
+                  </button>
+                ) : null}
               </div>
-              {index > 0 ? (
-                <button
-                  onClick={(e) => {
-                    e.preventDefault();
-                    removeSolicitor(index);
-                  }}
-                >
-                  x
-                </button>
-              ) : null}
             </div>
           ))}
-          <button onClick={addSolicitor}>Add Solicitor</button>
         </div>
-        <button onClick={(e) => handleGenerateButtonClick(e)}>Generate</button>
+        <div className="generate-container">
+          <button
+            onClick={(e) => handleGenerateButtonClick(e)}
+            className="generate-button"
+          >
+            Generate PDF
+          </button>
+        </div>
       </form>
     </div>
   );

@@ -1,0 +1,153 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+  color: black;
+}
+
+.app-container {
+  display: flex;
+  height: 100vh;
+}
+
+.container-one {
+  width: 130px;
+  background: white;
+  padding: 2vh;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.container-two {
+  position: relative;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 72px;
+  background: white;
+  border-right: 2px solid black;
+  border-left: 2px solid black;
+  user-select: none;
+  cursor: pointer;
+}
+
+.container-three {
+  flex-grow: 1;
+  background: white;
+  border-right: 1px solid black;
+}
+
+.inner-container-three {
+  padding: 10vh 10vh;
+  overflow-y: auto;
+  max-height: 95vh;
+}
+
+.container-four {
+  flex-grow: 1;
+  background: white;
+  border-left: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.div-one-button {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  outline: none;
+  margin-bottom: 8px;
+  margin-left: 5px;
+  cursor: help;
+}
+
+.div-one-button:hover {
+  color: rgb(49, 49, 49);
+  text-decoration: underline dotted;
+  text-decoration-thickness: 3px;
+  text-underline-offset: 5px;
+}
+
+.div-one-button:active {
+  transform: translate(2px, 2px);
+}
+
+.copyright {
+  font-family: sans-serif;
+  font-size: 14px;
+  margin-left: 60px;
+  margin-bottom: 30px;
+}
+
+.tapir-logo {
+  max-width: 60%;
+  max-height: 60%;
+  margin-top: 10px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.container-two-serif-font {
+  font-family: serif;
+  font-weight: 200;
+}
+
+.container-two-title-top {
+  font-family: sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 15px;
+  top: 50px;
+  right: 10px;
+  text-orientation: mixed;
+  writing-mode: vertical-rl;
+  position: absolute;
+}
+
+.container-two-middle {
+  font-family: sans-serif;
+  font-size: 14px;
+  line-height: 15px;
+  top: 40%;
+  right: 10px;
+  text-orientation: mixed;
+  writing-mode: vertical-rl;
+  position: absolute;
+}
+
+.container-two-bottom {
+  font-family: sans-serif;
+  font-size: 14px;
+  line-height: 15px;
+  bottom: 12px;
+  right: 10px;
+  position: absolute;
+  text-orientation: mixed;
+  writing-mode: vertical-rl;
+  text-align: right;
+}
+
+.orange-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background-color: orange;
+  border-radius: 50%;
+  margin-right: 5px;
+}
+
+.download-link-container {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+.pdf-download-link {
+  margin: auto;
+}
