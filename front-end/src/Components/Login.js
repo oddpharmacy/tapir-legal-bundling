@@ -55,11 +55,14 @@ export default function Login() {
   const handleLoginTrigger = async (event) => {
     event.preventDefault();
     try {
-      const response = await fetch("http://localhost:8080/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, password }),
-      });
+      const response = await fetch(
+        "https://tapir-legal-backend.onrender.com/login",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ username, password }),
+        }
+      );
 
       if (response.ok) {
         console.log("Logging in...");
