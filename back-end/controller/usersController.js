@@ -9,13 +9,14 @@ module.exports = {
       res.status(201).send(user);
     } catch (error) {
       console.log("Error: ", error);
-      res.status(409).send("Failed to create new user");
+      res.status(404).send("Failed to create new user");
     }
   },
 
   async getUser(req, res) {
     try {
       const user = await userModel.getUser(req.body);
+      console.log("User getuser: ", user);
       const dbPassword = user[0].password;
       const userInputPassword = req.body.password;
       const checkIfValidPassword = await bcrypt.compare(

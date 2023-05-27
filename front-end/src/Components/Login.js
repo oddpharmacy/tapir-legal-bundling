@@ -63,13 +63,17 @@ export default function Login() {
           body: JSON.stringify({ username, password }),
         }
       );
+      const data = await response.json();
 
       console.log("Response: ", response);
       console.log("Response body: ", response.body);
 
+      console.log("typeof data ", typeof data);
+
       if (response.ok) {
         console.log("Logging in...");
-        handleCloseLogin();
+        setIsLoggedIn(true);
+        setShowLogin(false);
       } else {
         console.log("Login failed");
         handleLoginFailed();
