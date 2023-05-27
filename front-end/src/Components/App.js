@@ -27,6 +27,8 @@ export default function App() {
   const [showLogin, setShowLogin] = useState(false);
   const [showSignUp, setShowSignup] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [currentUserId, setCurrentUserId] = useState("");
+  const [currentUserName, setCurrentUserName] = useState("");
 
   // Handlers
   const handleShowDownloadPdf = () => {
@@ -86,9 +88,12 @@ export default function App() {
           setUsername,
           password,
           setPassword,
+          isLoggedIn,
           setIsLoggedIn,
           setShowLogin,
           setShowSignup,
+          setCurrentUserId,
+          setCurrentUserName,
         }}
       >
         {showLogin ? <Login /> : showSignUp ? <Signup /> : null}

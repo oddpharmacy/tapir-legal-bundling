@@ -29,6 +29,17 @@ export default function Signup() {
     }, 4000);
   };
 
+  const handleCloseSignup = (event) => {
+    event.preventDefault();
+    setShowSignup(false);
+  };
+
+  const handleOutsideClick = (event) => {
+    if (event.target === event.currentTarget) {
+      setShowSignup(false);
+    }
+  };
+
   // POST Request
   const handleSignupTrigger = async (event) => {
     event.preventDefault();
@@ -61,9 +72,9 @@ export default function Signup() {
   };
 
   return (
-    <div className="signup-overlay">
+    <div className="signup-overlay" onClick={handleOutsideClick}>
       <div className="signup-container">
-        <button>x</button>
+        <button onClick={(e) => handleCloseSignup(e)}>x</button>
         <hr></hr>
         <form onSubmit={handleSignupTrigger}>
           <div>
@@ -97,7 +108,9 @@ export default function Signup() {
           </div>
           <input type="submit" className="submit-button" />
         </form>
-        {signupFailed ? <p>Signup unsuccessful. Username taken.</p> : null}
+        {signupFailed ? (
+          <p>Signup unsuccessful. Username already exists.</p>
+        ) : null}
       </div>
     </div>
   );
