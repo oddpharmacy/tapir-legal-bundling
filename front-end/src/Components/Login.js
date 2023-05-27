@@ -51,29 +51,21 @@ export default function Login() {
   // POST Request
   const handleLoginTrigger = async (event) => {
     event.preventDefault();
-
     try {
       const response = await fetch(
         "https://tapir-legal-backend.onrender.com/login",
         {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ username, password }),
         }
       );
-      const data = await response.json();
-
-      console.log("Response: ", response);
-      console.log("Response body: ", response.body);
-
-      console.log("typeof data ", typeof data);
-
       if (response.ok) {
         console.log("Logging in...");
         setIsLoggedIn(true);
         setShowLogin(false);
+        setUsername("");
+        setPassword("");
       } else {
         console.log("Login failed");
         handleLoginFailed();

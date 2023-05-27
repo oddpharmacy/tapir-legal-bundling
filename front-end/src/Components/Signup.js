@@ -22,10 +22,6 @@ export default function Signup() {
     setAgreeToTerms(event.target.checked);
   };
 
-  // const handleCloseSignUp = () => {
-  //   setShowSignup(false);
-  // };
-
   const handleSignupFailed = () => {
     setSignupFailed(true);
     setTimeout(() => {
