@@ -17,6 +17,9 @@ module.exports = {
     try {
       const user = await userModel.getUser(req.body);
       console.log("User getuser: ", user);
+      if (user.length === 0) {
+        return res.status(404).send("User not found");
+      }
       const dbPassword = user[0].password;
       const userInputPassword = req.body.password;
       const checkIfValidPassword = await bcrypt.compare(
