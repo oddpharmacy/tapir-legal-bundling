@@ -21,7 +21,8 @@ module.exports = {
 
   production: {
     client: "pg",
-    connection: process.env.DB_URL,
+    connection:
+      "postgres://mrtapir:fduOc65qUFhJ3yUPXsblMMX6x1wZTuyZ@dpg-chnd9i1mbg5577kqs2hg-a/tapir",
     pool: {
       min: 2,
       max: 10,
