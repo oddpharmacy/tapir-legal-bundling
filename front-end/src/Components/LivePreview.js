@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { PdfContext } from "../Contexts/PdfContext";
+import "../Styles/LivePreview.css";
 
 export default function LivePreview() {
   const { caseNumber, appellants, respondents, solicitors } =
@@ -10,13 +11,13 @@ export default function LivePreview() {
       <div className="preview-title-section">
         <p>IN THE MALAYSIAN COURT OF APPEAL</p>
         <p>(APPELLATE JURISDICTION)</p>
-        <p>CIVIL APPEAL NO. {caseNumber}</p>
+        <p className="caseno">CIVIL APPEAL NO. {caseNumber}</p>
       </div>
       <div className="preview-and-between">
         <p>BETWEEN</p>
       </div>
       {appellants.map((app, index) => (
-        <div key={index}>
+        <div key={index} className="the-parties-container">
           <p>
             {index + 1}. {app}
           </p>
@@ -26,16 +27,16 @@ export default function LivePreview() {
       <div className="preview-and-between">
         <p>AND</p>
       </div>
-      {respondents.map((res, index) => {
-        <div key={index}>
+      {respondents.map((res, index) => (
+        <div key={index} className="the-parties-container">
           <p>
             {index + 1}. {res}
           </p>
           <p>
             {index === respondents.length - 1 ? <p>... Respondent</p> : null}
           </p>
-        </div>;
-      })}
+        </div>
+      ))}
       <div className="volume-section">
         <p>RECORD OF APPEAL</p>
         <p>VOLUME 1</p>
@@ -48,19 +49,19 @@ export default function LivePreview() {
         const nextSol = solicitors[index + 1];
 
         return (
-          <div key={index}>
-            <div key={index}>
+          <div key={index} className="adv">
+            <div key={index} className="leftAdv">
               <p>{sol.name}</p>
               <p>Solicitors for the {sol.party}</p>
             </div>
 
             {nextSol ? (
-              <div key={index + 1}>
+              <div key={index + 1} className="rightAdv">
                 <p>{nextSol.name}</p>
                 <p>Solicitors for the {nextSol.party}</p>
               </div>
             ) : (
-              <div key={index + 1}></div>
+              <div key={index + 1} className="rightAdv"></div>
             )}
           </div>
         );
