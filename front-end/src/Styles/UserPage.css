@@ -1,0 +1,29 @@
+.userpage-container {
+  padding: 10px;
+}
+
+.userpage-history {
+  overflow-y: auto;
+  height: 80vh;
+  margin-top: 40px;
+}
+
+.userpage-case {
+  margin-bottom: 20px;
+}
+
+.userpage-title {
+  font-family: sans-serif;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  font-size: 20px;
+}
+
+.userpage-button {
+  margin-right: 20px;
+  background-color: transparent;
+  outline: none;
+  border-radius: 0;
+  border: 1.5px solid black;
+  padding: 5px 20px;
+}

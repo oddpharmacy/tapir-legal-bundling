@@ -95,6 +95,12 @@
   margin-top: 100%;
   font-family: sans-serif;
   font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.5s;
+}
+
+.div-one-username:hover {
+  transform: translateX(5px);
 }
 
 .copyright {
@@ -166,8 +172,13 @@
   justify-content: center;
   padding: 20px;
 }
+
 .pdf-download-link {
   margin: auto;
+}
+
+.hide-userpage {
+  display: none;
 }
 
 /* Transitions */
@@ -190,4 +201,16 @@
 
 .container-two:hover {
   transform: translateX(-5px);
+}
+
+.userpage-overlay {
+  background: #ffffff;
+  position: absolute;
+  left: 210px;
+  top: 0;
+  width: 90vw;
+  height: 100%;
+  overflow: hidden;
+  z-index: 5;
+  border-right: 2px solid black;
 }

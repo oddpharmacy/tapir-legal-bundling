@@ -13,6 +13,7 @@ import LivePreview from "./LivePreview";
 import Login from "./Login";
 import Signup from "./Signup";
 import WelcomeOverlay from "./WelcomeOverlay";
+import UserPage from "./UserPage";
 
 // Context imports
 import { PdfContext } from "../Contexts/PdfContext";
@@ -34,6 +35,8 @@ export default function App() {
   const [currentUserId, setCurrentUserId] = useState("");
   const [currentUserName, setCurrentUserName] = useState("");
   const [showWelcomeOverlay, setShowWelcomeOverlay] = useState(false);
+  const [showUserPage, setShowUserPage] = useState(false);
+  const [userCoverpageData, setUserCoverpageData] = useState([]);
 
   // Use effects
   useEffect(() => {
@@ -83,10 +86,34 @@ export default function App() {
     setShowUsername(false);
     setShowSignout(false);
     setIsLoggedIn(false);
+    setShowUserPage(false);
+    setCurrentUserId("");
+    setUserCoverpageData([]);
   };
 
   const handleWelcomeOverlay = () => {
-    setShowWelcomeOverlay(!showWelcomeOverlay);
+    if (showUserPage) {
+      setShowUserPage(false);
+    } else {
+      setShowWelcomeOverlay(!showWelcomeOverlay);
+    }
+  };
+
+  const handleUserPage = () => {
+    if (isLoggedIn) {
+      setShowUserPage(!showUserPage);
+    }
+  };
+
+  // GET coverpage data
+  const handleGetUserCoverpageData = async (userId) => {
+    try {
+      const response = await fetch(`http://localhost:8080/cases/${userId}`);
+      const data = await response.json();
+      setUserCoverpageData(data);
+    } catch (error) {
+      console.log("Error: ", error);
+    }
   };
 
   return (
@@ -110,13 +137,16 @@ export default function App() {
           setIsLoggedIn,
           setShowLogin,
           setShowSignup,
+          currentUserId,
           setCurrentUserId,
           setCurrentUserName,
           setShowWelcomeOverlay,
+          setShowUserPage,
+          userCoverpageData,
+          setUserCoverpageData,
         }}
       >
         {showLogin ? <Login /> : showSignUp ? <Signup /> : null}
-
         <div className="container-one">
           <p className="copyright">©2023</p>
           {showSignout ? (
@@ -139,7 +169,15 @@ export default function App() {
           <button className="div-one-button">Terms</button>
           <button className="div-one-button">Team</button>
           {showUsername ? (
-            <p className="div-one-username">{currentUserName}</p>
+            <p
+              className="div-one-username"
+              onClick={() => {
+                handleUserPage();
+                handleGetUserCoverpageData(currentUserId);
+              }}
+            >
+              {currentUserName}'s page
+            </p>
           ) : null}
         </div>
 
@@ -183,6 +221,12 @@ export default function App() {
           }`}
         >
           <WelcomeOverlay />
+        </div>
+
+        <div
+          className={`${showUserPage ? "userpage-overlay" : "hide-userpage"}`}
+        >
+          <UserPage handleGetUserCoverpageData={handleGetUserCoverpageData} />
         </div>
       </PdfContext.Provider>
     </div>
