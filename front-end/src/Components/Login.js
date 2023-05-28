@@ -29,7 +29,6 @@ export default function Login() {
 
   const handleCloseLogin = (event) => {
     event.preventDefault();
-    setIsLoggedIn(true);
     setShowLogin(false);
   };
 
@@ -118,12 +117,14 @@ export default function Login() {
             <input type="submit" className="login-submit-button" />
           </div>
         </form>
-        {loginFailed ? (
-          <p>Login unsuccessful. Incorrect username or password.</p>
-        ) : null}
         <button onClick={handleShowSignUp} className="show-signup-button">
           Sign Up
         </button>
+        {loginFailed ? (
+          <p className="handle-failure">
+            Login unsuccessful. Incorrect username or password.
+          </p>
+        ) : null}
       </div>
     </div>
   );

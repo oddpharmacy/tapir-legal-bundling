@@ -120,7 +120,9 @@ export default function Signup() {
           </div>
         </form>
         {signupFailed ? (
-          <p>Signup unsuccessful. Username already exists.</p>
+          <p className="handle-failure">
+            Signup unsuccessful. Username already exists.
+          </p>
         ) : null}
       </div>
     </div>

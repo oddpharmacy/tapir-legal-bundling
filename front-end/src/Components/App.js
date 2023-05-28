@@ -1,5 +1,5 @@
 // Package imports
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { PDFDownloadLink } from "@react-pdf/renderer";
 
 // Style imports
@@ -12,6 +12,7 @@ import AppealCoverTemplate from "./AppealCoverTemplate";
 import LivePreview from "./LivePreview";
 import Login from "./Login";
 import Signup from "./Signup";
+import WelcomeOverlay from "./WelcomeOverlay";
 
 // Context imports
 import { PdfContext } from "../Contexts/PdfContext";
@@ -27,9 +28,20 @@ export default function App() {
   const [password, setPassword] = useState("");
   const [showLogin, setShowLogin] = useState(false);
   const [showSignUp, setShowSignup] = useState(false);
+  const [showSignout, setShowSignout] = useState(false);
+  const [showUsername, setShowUsername] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentUserId, setCurrentUserId] = useState("");
   const [currentUserName, setCurrentUserName] = useState("");
+  const [showWelcomeOverlay, setShowWelcomeOverlay] = useState(false);
+
+  // Use effects
+  useEffect(() => {
+    if (isLoggedIn) {
+      setShowUsername(true);
+      setShowSignout(true);
+    }
+  }, [isLoggedIn]);
 
   // Handlers
   const handleShowDownloadPdf = () => {
@@ -66,6 +78,17 @@ export default function App() {
     setShowLogin(true);
   };
 
+  const handleSignout = (event) => {
+    event.preventDefault();
+    setShowUsername(false);
+    setShowSignout(false);
+    setIsLoggedIn(false);
+  };
+
+  const handleWelcomeOverlay = () => {
+    setShowWelcomeOverlay(!showWelcomeOverlay);
+  };
+
   return (
     <div className="app-container">
       <PdfContext.Provider
@@ -89,23 +112,38 @@ export default function App() {
           setShowSignup,
           setCurrentUserId,
           setCurrentUserName,
+          setShowWelcomeOverlay,
         }}
       >
         {showLogin ? <Login /> : showSignUp ? <Signup /> : null}
+
         <div className="container-one">
           <p className="copyright">©2023</p>
-          <button
-            onClick={(e) => handleShowLogin(e)}
-            className="div-one-button"
-          >
-            Login
-          </button>
+          {showSignout ? (
+            <button
+              onClick={(e) => handleSignout(e)}
+              className="div-one-button"
+            >
+              Signout
+            </button>
+          ) : (
+            <button
+              onClick={(e) => handleShowLogin(e)}
+              className="div-one-button"
+            >
+              Login
+            </button>
+          )}
           <button className="div-one-button">About</button>
           <button className="div-one-button">Usage</button>
           <button className="div-one-button">Terms</button>
           <button className="div-one-button">Team</button>
+          {showUsername ? (
+            <p className="div-one-username">{currentUserName}</p>
+          ) : null}
         </div>
-        <div className="container-two">
+
+        <div className="container-two" onClick={handleWelcomeOverlay}>
           <img src={tapirImage} alt="Tapir" className="tapir-logo" />
           <span className="container-two-title-top">
             TAPIR
@@ -125,6 +163,7 @@ export default function App() {
             <span className="container-two-serif-font">2023</span>
           </div>
         </div>
+
         <div className="container-three">
           <div className="inner-container-three">
             <UserInputForm />
@@ -133,26 +172,19 @@ export default function App() {
             </div>
           </div>
         </div>
+
         <div className="container-four">
           <LivePreview />
+        </div>
+
+        <div
+          className={`welcome-overlay ${
+            showWelcomeOverlay ? "welcome-open" : ""
+          }`}
+        >
+          <WelcomeOverlay />
         </div>
       </PdfContext.Provider>
     </div>
   );
 }
-
-//  const [generatePdf, setGeneratePdf] = useState(false);
-// {generatePdf ? (
-//   <PDFViewer style={{ width: "70%", height: "500px" }}>
-//     <PdfContext.Provider
-//       value={{
-//         caseNumber,
-//         appellants,
-//         respondents,
-//         solicitors,
-//       }}
-//     >
-//       <AppealCoverTemplate />
-//     </PdfContext.Provider>
-//   </PDFViewer>
-// ) : null}

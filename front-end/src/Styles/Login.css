@@ -9,6 +9,7 @@
   justify-content: center;
   align-items: center;
   font-family: sans-serif;
+  z-index: 9999;
 }
 
 .login-container {
@@ -92,4 +93,10 @@
 .login-submit-button:hover {
   text-decoration: underline;
   cursor: pointer;
+}
+
+.handle-failure {
+  color: red;
+  font-size: 12px;
+  text-align: center;
 }

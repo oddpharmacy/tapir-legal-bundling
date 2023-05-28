@@ -8,6 +8,7 @@
 .app-container {
   display: flex;
   height: 100vh;
+  overflow: hidden;
 }
 
 .container-one {
@@ -17,6 +18,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  z-index: 4;
 }
 
 .container-two {
@@ -31,12 +33,16 @@
   border-left: 2px solid black;
   user-select: none;
   cursor: pointer;
+  z-index: 5;
+  transition: transform 0.5s;
 }
 
 .container-three {
   flex-grow: 1;
   background: white;
   border-right: 1px solid black;
+  z-index: 1;
+  position: relative;
 }
 
 .inner-container-three {
@@ -52,6 +58,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 1;
+  position: relative;
 }
 
 .div-one-button {
@@ -77,6 +85,15 @@
 
 .div-one-button:active {
   transform: translate(2px, 2px);
+}
+
+.div-one-username {
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+  margin-left: 40%;
+  margin-top: 100%;
+  font-family: sans-serif;
+  font-weight: 700;
 }
 
 .copyright {
@@ -150,4 +167,26 @@
 }
 .pdf-download-link {
   margin: auto;
+}
+
+/* Transitions */
+.welcome-open {
+  transform: translate(calc(-101vw + 100px), 0);
+}
+
+.welcome-overlay {
+  background: #ffffff;
+  position: absolute;
+  left: 250px;
+  top: 0;
+  width: calc(98.5vw - 100px);
+  height: 100%;
+  overflow: hidden;
+  z-index: 3;
+  border-right: 2px solid black;
+  transition: transform 0.5s, margin 0.5s;
+}
+
+.container-two:hover {
+  transform: translateX(-5px);
 }
