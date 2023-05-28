@@ -35,17 +35,20 @@ export default function UserInputForm() {
     } else {
       try {
         let userId = currentUserId;
-        const response = await fetch("http://localhost:8080/createcase", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            userId,
-            caseNumber,
-            appellants,
-            respondents,
-            solicitors,
-          }),
-        });
+        const response = await fetch(
+          "https://tapir-legal-backend.onrender.com/createcase",
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              userId,
+              caseNumber,
+              appellants,
+              respondents,
+              solicitors,
+            }),
+          }
+        );
 
         if (response.ok) {
           alert("Input saved successfully!");
