@@ -108,7 +108,9 @@ export default function App() {
   // GET coverpage data
   const handleGetUserCoverpageData = async (userId) => {
     try {
-      const response = await fetch(`http://localhost:8080/cases/${userId}`);
+      const response = await fetch(
+        `https://tapir-legal-backend.onrender.com/cases/${userId}`
+      );
       const data = await response.json();
       setUserCoverpageData(data);
     } catch (error) {

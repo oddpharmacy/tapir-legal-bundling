@@ -46,13 +46,14 @@ export default function Signup() {
     console.log("newuser: ", username);
     console.log("newpassword: ", password);
     try {
-      // https://tapir-legal-backend.onrender.com/signup
-
-      const response = await fetch("http://localhost:8080/signup", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, password }),
-      });
+      const response = await fetch(
+        "https://tapir-legal-backend.onrender.com/signup",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ username, password }),
+        }
+      );
 
       console.log("Response: ", response);
       const body = await response.text();
