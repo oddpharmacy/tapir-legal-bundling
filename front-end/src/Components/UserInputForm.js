@@ -1,7 +1,6 @@
 import React, { useContext, useState } from "react";
 import { PdfContext } from "../Contexts/PdfContext";
 import AppealCoverTemplate from "./AppealCoverTemplate";
-import { PDFDownloadLink } from "@react-pdf/renderer";
 import "../Styles/UserInputForm.css";
 
 export default function UserInputForm() {
@@ -15,12 +14,48 @@ export default function UserInputForm() {
     solicitors,
     setSolicitors,
     setShowDownloadLink,
+    isLoggedIn,
+    currentUserId,
   } = useContext(PdfContext);
+
+  const [error, setError] = useState("");
 
   // Handlers
   const handleGenerateButtonClick = (event) => {
     event.preventDefault();
     setShowDownloadLink(true);
+  };
+
+  // POST Request
+  const handleSaveAndGenerate = async (event) => {
+    event.preventDefault();
+    if (!caseNumber || !appellants || !respondents || !solicitors) {
+      setError("Please fill in required fields");
+      alert(error);
+    } else {
+      try {
+        let userId = currentUserId;
+        const response = await fetch("http://localhost:8080/createcase", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            userId,
+            caseNumber,
+            appellants,
+            respondents,
+            solicitors,
+          }),
+        });
+
+        if (response.ok) {
+          alert("Input saved successfully!");
+          console.log("Saving input");
+          setShowDownloadLink(true);
+        }
+      } catch (error) {
+        console.log("Error: ", error);
+      }
+    }
   };
 
   // Cases
@@ -216,6 +251,14 @@ export default function UserInputForm() {
           >
             Generate PDF
           </button>
+          {isLoggedIn ? (
+            <button
+              className="generate-button save-button"
+              onClick={(e) => handleSaveAndGenerate(e)}
+            >
+              Save Input & Generate
+            </button>
+          ) : null}
         </div>
       </form>
     </div>

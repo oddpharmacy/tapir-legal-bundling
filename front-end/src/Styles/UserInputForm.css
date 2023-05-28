@@ -98,6 +98,9 @@ label {
 .generate-container {
   display: flex;
   justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .generate-button {
@@ -109,4 +112,9 @@ label {
   color: white;
   font-size: 12px;
   font-weight: 500;
+}
+
+.save-button {
+  padding: 5px 0;
+  height: 40px;
 }
