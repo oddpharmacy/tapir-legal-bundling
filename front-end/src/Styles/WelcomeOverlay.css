@@ -1,0 +1,50 @@
+.welcome-overlay-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.welcome-overlay-contents {
+  margin-left: -200px;
+  text-align: center;
+}
+
+.welcome-overlay-button {
+  transition: transform 0.5s;
+  background-color: transparent;
+  outline: none;
+  border: none;
+  font-family: sans-serif;
+  font-weight: 800;
+  margin-top: 15px;
+}
+
+.welcome-overlay-button:hover {
+  transform: translateX(10px);
+  text-decoration: underline;
+}
+
+.tapir-overlay-title {
+  font-family: sans-serif;
+  font-size: 80px;
+}
+
+.tapir-overlay-subtitle {
+  margin-bottom: 20px;
+  font-family: serif;
+  font-size: 20px;
+}
+
+.tapirglasses-logo {
+  max-width: 70%;
+  max-height: 70%;
+  margin-left: 20px;
+  margin-bottom: 10px;
+}
+
+.tapir-overlay-text {
+  font-family: serif;
+  margin-bottom: 5px;
+}

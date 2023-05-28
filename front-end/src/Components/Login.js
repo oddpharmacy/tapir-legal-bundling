@@ -29,7 +29,6 @@ export default function Login() {
 
   const handleCloseLogin = (event) => {
     event.preventDefault();
-    setIsLoggedIn(true);
     setShowLogin(false);
   };
 
@@ -85,35 +84,47 @@ export default function Login() {
   return (
     <div className="login-overlay" onClick={handleOutsideClick}>
       <div className="login-container">
-        <button onClick={(e) => handleCloseLogin(e)}>x</button>
-        <hr></hr>
-        <form onSubmit={handleLoginTrigger}>
-          <div>
+        <button
+          onClick={(e) => handleCloseLogin(e)}
+          className="login-close-button"
+        >
+          x
+        </button>
+        <hr className="login-line" />
+        <form onSubmit={handleLoginTrigger} className="form-login">
+          <div className="form-group">
             <label>Username</label>
             <input
               type="text"
               value={username}
               onChange={handleUsernameChange}
+              className="form-input"
               required
             />
           </div>
-          <div>
-            <label>Password</label>
+          <div className="form-group">
+            <label className="password-label">Password</label>
             <input
               type="password"
               value={password}
               onChange={handlePasswordChange}
+              className="form-input"
               required
             />
           </div>
-          <input type="submit" className="login-submit-button" />
+          <br />
+          <div className="submit-button-container">
+            <input type="submit" className="login-submit-button" />
+          </div>
         </form>
-        {loginFailed ? (
-          <p>Login unsuccessful. Incorrect username or password.</p>
-        ) : null}
         <button onClick={handleShowSignUp} className="show-signup-button">
           Sign Up
         </button>
+        {loginFailed ? (
+          <p className="handle-failure">
+            Login unsuccessful. Incorrect username or password.
+          </p>
+        ) : null}
       </div>
     </div>
   );
