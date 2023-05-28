@@ -103,7 +103,7 @@ export default function Login() {
             />
           </div>
           <div className="form-group">
-            <label className="password-label">Password</label>
+            <label>Password</label>
             <input
               type="password"
               value={password}
